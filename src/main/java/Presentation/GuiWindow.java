@@ -2,6 +2,11 @@ package Presentation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import Resources.ProgramStrings;
 
 
@@ -35,9 +40,13 @@ public class GuiWindow extends JFrame implements FrameWindowInterface {
 
     private void setTexts(){
         this.addTankButton.setText(ProgramStrings.plus);
+        this.addTankButton.addKeyListener(onAddTankClick);
         this.addMarkButton.setText(ProgramStrings.addMark);
+        this.addMarkButton.addKeyListener(onAddMarkClick);
         this.checkStatisticsButton.setText(ProgramStrings.checkStatistics);
+        this.checkStatisticsButton.addKeyListener(onCheckStatisticsClick);
         this.tanksSettingsButton.setText(ProgramStrings.tanksSettings);
+        this.tanksSettingsButton.addKeyListener(onSettingsClick);
         this.selectTankLabel.setText(ProgramStrings.selectTank);
         this.addMarkLabel.setText(ProgramStrings.addMark);
     }
@@ -53,6 +62,35 @@ public class GuiWindow extends JFrame implements FrameWindowInterface {
         }
     }
 
-  
+
+    KeyListener onAddTankClick = new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+        }
+    };
+
+    KeyListener onAddMarkClick = new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+        }
+    };
+
+    KeyListener onCheckStatisticsClick = new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+        }
+    };
+
+    KeyListener onSettingsClick = new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+        }
+    };
+
+
 
 }
