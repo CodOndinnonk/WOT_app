@@ -8,10 +8,64 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class XlsxWork {
+    //экселевский документ
+    XSSFWorkbook myExcelBook = null;
 
+
+    /***
+     * Происходит открытие файла
+     * @param filePath путь к расположению файла (D:/Cloud/...)
+     */
+    public XlsxWork(String filePath){
+        if (filePath.length() < 3){
+            System.out.println("Wrong file path");
+            return;
+        }
+        try {
+            myExcelBook = new XSSFWorkbook(new FileInputStream(filePath));
+        } catch (IOException e) {
+            System.out.println("Error reading file");
+            e.printStackTrace();
+        }
+    }
+
+    private void getSheetsInfo(XSSFWorkbook book){
+        //кол-во станиц в документе
+        int sheetsAmt = book.getNumberOfSheets();
+        System.out.print("\nвсего страниц = " + book.getNumberOfSheets());
+
+        //карта с порядковым номером стр и ее именем
+        Map<Integer, String> sheetsNames = new HashMap<Integer, String>();
+
+        //заполняем карту страниц
+        for (int i = 0; i < sheetsAmt; i++) {
+            sheetsNames.put(i,book.getSheetName(i));
+            System.out.print("\nСтраница " + (i+1)+" "+book.getSheetName(i));
+        }
+    }
+
+    public List<String> getTanksSettings(){
+        //название страницы с настройками видимости других страниц
+        String settingsSheetName = "Settings";
+
+        //заполняем карту обрабатываемых страниц
+        Map<String,Double> isSheetProcessing = new HashMap<String, Double>();
+        //кол-во столбцов для использования (2, так как название листа и флаг)
+        int listNamePosition = 0;
+        int listProcessingFlagPosition = 1;
+
+        //записываем в лист все строки файла
+        for (int i = 0; i <= myExcelBook.getSheet(settingsSheetName).getLastRowNum(); i++) {
+            XSSFRow row = myExcelBook.getSheet(settingsSheetName).getRow(i);
+            isSheetProcessing.put(readValueFromCell(row.getCell(listNamePosition)),readNumberFromCell(row.getCell(listProcessingFlagPosition)));
+        }
+
+        return null;
+    }
 
 
     /**
@@ -19,7 +73,7 @@ public class XlsxWork {
      * @param cell ячейка из строки
      * @return
      */
-    public static Double readNumberFromCell(XSSFCell cell){
+    private Double readNumberFromCell(XSSFCell cell){
         return Double.valueOf(readValueFromCell(cell));
     }
 
@@ -30,7 +84,7 @@ public class XlsxWork {
      * @param cell ячейка из строки
      * @return null -> пустая ячейка, числа возвращаются в виде строки
      */
-    public static String readValueFromCell(XSSFCell cell){
+    private String readValueFromCell(XSSFCell cell){
         if (cell == null){return null;}
         int cellType = cell.getCellType();
         if ((cell == null) || (cell.getCellType() == XSSFCell.CELL_TYPE_BLANK)) {
@@ -51,7 +105,7 @@ public class XlsxWork {
 
 
 
-    public static void readFromExcel(String file)  {
+    public static void readFromElsx(String file)  {
         //экселевский документ
         XSSFWorkbook myExcelBook = null;
         //список для строк в странице

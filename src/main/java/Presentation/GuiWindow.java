@@ -2,10 +2,7 @@ package Presentation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 import Resources.ProgramStrings;
 
@@ -40,15 +37,16 @@ public class GuiWindow extends JFrame implements FrameWindowInterface {
 
     private void setTexts(){
         this.addTankButton.setText(ProgramStrings.plus);
-        this.addTankButton.addKeyListener(onAddTankClick);
+        this.addTankButton.addActionListener(onAddTankClick);
         this.addMarkButton.setText(ProgramStrings.addMark);
-        this.addMarkButton.addKeyListener(onAddMarkClick);
+        this.addMarkButton.addActionListener(onAddMarkClick);
         this.checkStatisticsButton.setText(ProgramStrings.checkStatistics);
-        this.checkStatisticsButton.addKeyListener(onCheckStatisticsClick);
+        this.checkStatisticsButton.addActionListener(onCheckStatisticsClick);
         this.tanksSettingsButton.setText(ProgramStrings.tanksSettings);
-        this.tanksSettingsButton.addKeyListener(onSettingsClick);
+        this.tanksSettingsButton.addActionListener(onSettingsClick);
         this.selectTankLabel.setText(ProgramStrings.selectTank);
         this.addMarkLabel.setText(ProgramStrings.addMark);
+
     }
 
     @Override
@@ -62,35 +60,37 @@ public class GuiWindow extends JFrame implements FrameWindowInterface {
         }
     }
 
-
-    KeyListener onAddTankClick = new KeyAdapter() {
+    ActionListener onAddTankClick = new ActionListener() {
         @Override
-        public void keyPressed(KeyEvent e) {
-
+        public void actionPerformed(ActionEvent e) {
+            TanksSettings tanksSettings = new TanksSettings();
+            tanksSettings.showWindow();
         }
     };
 
-    KeyListener onAddMarkClick = new KeyAdapter() {
+    ActionListener onAddMarkClick = new ActionListener() {
         @Override
-        public void keyPressed(KeyEvent e) {
-
+        public void actionPerformed(ActionEvent e) {
+            TanksSettings tanksSettings = new TanksSettings();
+            tanksSettings.showWindow();
         }
     };
 
-    KeyListener onCheckStatisticsClick = new KeyAdapter() {
+    ActionListener onCheckStatisticsClick = new ActionListener() {
         @Override
-        public void keyPressed(KeyEvent e) {
-
+        public void actionPerformed(ActionEvent e) {
+            TanksSettings tanksSettings = new TanksSettings();
+            tanksSettings.showWindow();
         }
     };
 
-    KeyListener onSettingsClick = new KeyAdapter() {
+    ActionListener onSettingsClick = new ActionListener() {
         @Override
-        public void keyPressed(KeyEvent e) {
-
+        public void actionPerformed(ActionEvent e) {
+            TanksSettings tanksSettings = new TanksSettings();
+            tanksSettings.showWindow();
         }
     };
-
 
 
 }

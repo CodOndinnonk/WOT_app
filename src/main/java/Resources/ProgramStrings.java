@@ -8,5 +8,7 @@ public class ProgramStrings {
     public static final String add = "Добавить";
     public static final String checkStatistics = "Просмотр статистики";
     public static final String tanksSettings = "Настройка техники";
+    public static final String delete = "Удалить";
+
 
 }
